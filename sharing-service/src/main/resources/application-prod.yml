@@ -1,22 +1,10 @@
 server:
-  port: 8081
-
-
-eureka:
-  instance:
-    hostname: localhost
-    prefer-ip-address: true
-  client:
-    registerWithEureka: true
-    fetchRegistry: true
-    serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
-
+  port: 8083
 
 spring:
-  profiles: default
+  profiles: prod
   application:
-    name: auth-service
+    name: sharing-service
   datasource:
     url: jdbc:mysql://localhost:3306/scienceporn_db?useSSL=false
     username: root
@@ -36,14 +24,32 @@ spring:
         physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
       ddl-auto: update
 
+#eureka:
+#  instance:
+#    hostname: localhost
+#    prefer-ip-address: true
+#  client:
+#    registerWithEureka: true
+#    fetchRegistry: true
+#    serviceUrl:
+#      defaultZone: http://localhost:8761/eureka/
 
 logging:
   level:
     ROOT: ERROR
     org.springframework.web: ERROR
-    com.cayan.authservice: DEBUG
+    com.cayan.sharingservice: DEBUG
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
     file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
   file:
-    name: /tmp/science-porn/log/application-auth-debug.log
+    name: /tmp/science-porn/log/application-content-debug.log
+
+
+auth-server:
+  url: http://localhost:8081
+
+management:
+  security:
+    enabled: false
+

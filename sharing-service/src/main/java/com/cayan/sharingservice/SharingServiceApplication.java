@@ -11,8 +11,6 @@ import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 @EnableCircuitBreaker
-//@EnableEurekaClient
-//EnableFeignClients
 public class SharingServiceApplication {
 
     public static void main(String[] args) {

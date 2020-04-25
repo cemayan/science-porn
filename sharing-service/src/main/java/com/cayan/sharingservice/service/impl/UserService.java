@@ -1,6 +1,8 @@
-package com.cayan.sharingservice.service;
+package com.cayan.sharingservice.service.impl;
 
+import com.cayan.common.model.dto.UserDTO;
 import com.cayan.sharingservice.config.RibbonConfiguration;
+import com.cayan.sharingservice.service.IUserService;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import org.springframework.cloud.netflix.ribbon.RibbonClient;
@@ -9,7 +11,7 @@ import org.springframework.web.client.RestTemplate;
 
 @Service
 @RibbonClient(name = "user-service", configuration = RibbonConfiguration.class)
-public class UserService {
+public class UserService  implements IUserService {
 
     private final RestTemplate restTemplate;
 
@@ -19,11 +21,11 @@ public class UserService {
 
     @HystrixCommand(fallbackMethod = "userfallbackMethod", commandProperties = {
             @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "1000") })
-    public String getUser(Long userId) {
-        return this.restTemplate.getForObject("http://user-service/api/user/"+ userId, String.class);
+    public UserDTO getUser(Long userId) {
+        return this.restTemplate.getForObject("http://user-service/api/user/"+ userId, UserDTO.class);
     }
 
-    private String userfallbackMethod(Long userId) {
-        return "Sorry!";
+    private UserDTO userfallbackMethod(Long userId) {
+        return  new UserDTO();
     }
 }

@@ -7,6 +7,7 @@ import com.cayan.userservice.repository.UserRepository;
 import com.cayan.userservice.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -20,6 +21,7 @@ public class UserServiceImpl implements UserService {
     UserMapper userMapper;
 
     @Override
+    @Transactional(readOnly = true)
     public Optional<UserDTO> getUser(Long userId) {
         return  userMapper.convertToDto(userRepository.findById(userId));
     }
