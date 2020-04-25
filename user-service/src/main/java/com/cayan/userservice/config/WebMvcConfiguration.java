@@ -1,4 +1,4 @@
-package com.cayan.sharingservice.config;
+package com.cayan.userservice.config;
 
 
 import com.cayan.common.model.CustomPrincipal;

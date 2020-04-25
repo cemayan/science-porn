@@ -13,12 +13,6 @@ public class Role extends BaseEntity  {
 
     private String name;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "permission_role", joinColumns = {
-            @JoinColumn(name = "role_id", referencedColumnName = "id") }, inverseJoinColumns = {
-            @JoinColumn(name = "permission_id", referencedColumnName = "id") })
-    private Collection<Permission> permissions;
-
     public Long getId() {
         return id;
     }
@@ -31,11 +25,4 @@ public class Role extends BaseEntity  {
         this.name = name;
     }
 
-    public Collection<Permission> getPermissions() {
-        return permissions;
-    }
-
-    public void setPermissions(Collection<Permission> permissions) {
-        this.permissions = permissions;
-    }
 }

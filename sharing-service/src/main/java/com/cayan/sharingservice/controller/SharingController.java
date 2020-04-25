@@ -12,7 +12,6 @@ public class SharingController {
     @Autowired
     UserService userService;
 
-    @PreAuthorize("hasAuthority('role_admin')")
     @RequestMapping(value = "/user/{userId}", method = RequestMethod.GET)
     public String getUser(@PathVariable("userId") Long userId) {
         return  userService.getUser(userId);

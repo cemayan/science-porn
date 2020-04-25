@@ -1,9 +1,11 @@
-package com.cayan.authservice.entity;
+package com.cayan.userservice.entity;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -17,9 +19,15 @@ public class User extends BaseEntity implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull
     private String email;
+
+    @NotNull
     private String username;
+
+    @NotNull
     private String password;
+
     private boolean enabled;
 
     @Column(name = "account_locked")

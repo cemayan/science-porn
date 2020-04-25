@@ -1,4 +1,4 @@
-package com.cayan.sharingservice.model;
+package com.cayan.common.model;
 
 import java.io.Serializable;
 

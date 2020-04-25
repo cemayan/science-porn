@@ -20,7 +20,7 @@ public class UserService {
     @HystrixCommand(fallbackMethod = "userfallbackMethod", commandProperties = {
             @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "1000") })
     public String getUser(Long userId) {
-        return this.restTemplate.getForObject("http://user-service/getUser/"+ userId, String.class);
+        return this.restTemplate.getForObject("http://user-service/api/user/"+ userId, String.class);
     }
 
     private String userfallbackMethod(Long userId) {
