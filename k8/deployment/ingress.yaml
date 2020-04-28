@@ -1,0 +1,20 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: example-ingress
+  annotations:
+    #nginx.ingress.kubernetes.io/rewrite-target: /
+    ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+    - host: helloworld.info
+      http:
+        paths:
+          - path: /uaa
+            backend:
+              serviceName: auth-service
+              servicePort: 8081
+          - path: /user
+            backend:
+              serviceName: user-service
+              servicePort: 8084

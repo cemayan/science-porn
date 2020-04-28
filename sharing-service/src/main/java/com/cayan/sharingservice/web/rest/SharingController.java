@@ -1,7 +1,7 @@
 package com.cayan.sharingservice.web.rest;
 
 
-import com.cayan.common.model.dto.UserDTO;
+import com.cayan.common.dto.UserDTO;
 import com.cayan.sharingservice.aop.LogExecutionTime;
 import com.cayan.sharingservice.aop.LogRequest;
 import com.cayan.sharingservice.service.IKafkaService;

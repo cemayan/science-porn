@@ -1,12 +1,14 @@
 server:
-  port: 8084
+  port: 8081
   servlet:
-    context-path: /user
+    context-path: /uaa
+
+
 
 spring:
   profiles: dev
   application:
-    name: user-service
+    name: auth-service
   datasource:
     url: jdbc:mysql://localhost:3306/scienceporn_db?useSSL=false
     username: root
@@ -27,25 +29,13 @@ spring:
       ddl-auto: update
 
 
-
-
-auth-server:
-  url: http://localhost:8081/uaa
-
-
 logging:
   level:
     ROOT: ERROR
     org.springframework.web: ERROR
-    com.cayan.userservice: DEBUG
+    com.cayan.authservice: DEBUG
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
     file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
   file:
-    name: /tmp/science-porn/log/application-user.log
-
-
-
-management:
-  security:
-    enabled: false
+    name: /tmp/science-porn/log/application-auth-debug.log

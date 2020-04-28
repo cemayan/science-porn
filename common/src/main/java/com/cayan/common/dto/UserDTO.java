@@ -1,8 +1,6 @@
-package com.cayan.common.model.dto;
-
+package com.cayan.common.dto;
 
 public class UserDTO {
-
     private Long id;
 
     private String email;

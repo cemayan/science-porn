@@ -1,6 +1,6 @@
 package com.cayan.sharingservice.service.impl;
 
-import com.cayan.common.model.dto.UserDTO;
+import com.cayan.common.dto.UserDTO;
 import com.cayan.sharingservice.config.RibbonConfiguration;
 import com.cayan.sharingservice.service.IUserService;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;

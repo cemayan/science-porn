@@ -2,13 +2,15 @@ server:
   port: 8084
   error:
     include-stacktrace: on_trace_param
+  servlet:
+    context-path: /user
 
 spring:
   profiles: prod
   application:
     name: user-service
   datasource:
-    url: jdbc:mysql://localhost:3306/scienceporn_db?useSSL=false
+    url: jdbc:mysql://mysql:3306/scienceporn_db?useSSL=false
     username: root
     password: password
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -30,14 +32,14 @@ spring:
 
 
 auth-server:
-  url: http://localhost:8081
+  url: http://auth-service:8081/uaa
 
 
 logging:
   level:
     ROOT: ERROR
     org.springframework.web: ERROR
-    com.cemayan.userservice: DEBUG
+    com.cayan.userservice: DEBUG
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
     file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"

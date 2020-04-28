@@ -1,10 +1,6 @@
 package com.cayan.common.model;
 
-import java.io.Serializable;
-
-public class CustomPrincipal implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+public class CustomPrincipal {
 
     private String username;
     private String email;

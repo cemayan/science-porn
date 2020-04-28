@@ -6,6 +6,8 @@ services:
     image: wurstmeister/zookeeper
     ports:
       - "2181:2181"
+    networks:
+     - scienceporn_network
   kafka:
     hostname: kafka
     container_name: kafka
@@ -21,3 +23,8 @@ services:
       KAFKA_INTER_BROKER_LISTENER_NAME: INSIDE
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - scienceporn_network
+networks:
+  scienceporn_network:
+    external: true

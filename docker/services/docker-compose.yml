@@ -1,0 +1,62 @@
+version: '2'
+services:
+  auth-service:
+    hostname: auth-service
+    container_name: auth-service
+    build:
+      context: ../../auth-service/
+      dockerfile: Dockerfile
+    volumes:
+      - auth-service-data:/data/auth-service
+    ports:
+      - "8081:8081"
+    restart: on-failure
+    networks:
+      - scienceporn_network
+  content-service:
+    hostname: content-service
+    container_name: content-service
+    build:
+      context: ../../content-service/
+      dockerfile: Dockerfile
+    volumes:
+      - content-service-data:/data/content-service
+    ports:
+      - "8082:8082"
+    restart: on-failure
+    networks:
+      - scienceporn_network
+  sharing-service:
+    hostname: sharing-service
+    container_name: sharing-service
+    build:
+      context: ../../sharing-service/
+      dockerfile: Dockerfile
+    volumes:
+      - sharing-service-data:/data/sharing-service
+    ports:
+      - "8083:8083"
+    restart: on-failure
+    networks:
+      - scienceporn_network
+  user-service:
+    hostname: user-service
+    container_name: user-service
+    build:
+      context: ../../user-service/
+      dockerfile: Dockerfile
+    volumes:
+      - user-service-data:/data/user-service
+    ports:
+      - "8084:8084"
+    restart: on-failure
+    networks:
+      - scienceporn_network
+networks:
+   scienceporn_network:
+     external: true
+volumes:
+  auth-service-data:
+  content-service-data:
+  sharing-service-data:
+  user-service-data:
