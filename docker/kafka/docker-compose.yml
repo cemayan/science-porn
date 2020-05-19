@@ -4,6 +4,8 @@ services:
     hostname: zookeeper
     container_name: zookeeper
     image: wurstmeister/zookeeper
+    depends_on:
+      - kafka
     ports:
       - "2181:2181"
     networks:

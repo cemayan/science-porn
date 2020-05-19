@@ -47,7 +47,7 @@ user-service:
     listOfServers: user-service:8084
 
 auth-server:
-  url: http://auth-service:8081
+  url: http://auth-service:8081/uaa
 
 management:
   security:

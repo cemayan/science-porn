@@ -2,6 +2,7 @@ package com.cayan.authservice.entity;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 
 
 @Entity
@@ -12,6 +13,7 @@ public class Role extends BaseEntity  {
     private Long id;
 
     private String name;
+
 
     public Long getId() {
         return id;

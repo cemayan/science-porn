@@ -2,8 +2,26 @@ package com.cayan.common.model;
 
 public class CustomPrincipal {
 
+    private Long userId;
     private String username;
     private String email;
+
+    public CustomPrincipal() {
+    }
+
+    public CustomPrincipal(Long userId, String username, String email) {
+        this.userId = userId;
+        this.username = username;
+        this.email = email;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
 
     public String getUsername() {
         return username;

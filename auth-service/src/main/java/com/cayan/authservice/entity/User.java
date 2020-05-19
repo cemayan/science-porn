@@ -65,6 +65,7 @@ public class User extends BaseEntity implements UserDetails {
             authorities.add(new SimpleGrantedAuthority(r.getName()));
         });
 
+
         return authorities;
     }
 

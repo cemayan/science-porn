@@ -1,7 +1,11 @@
 package com.cayan.authservice.configuration;
 
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import javax.sql.DataSource;
 
@@ -96,20 +100,36 @@ public class OAuth2Configuration extends AuthorizationServerConfigurerAdapter {
         return converter;
     }
 
-    /*
-     * Add custom user principal information to the JWT token
-     */
+
+
     class CustomTokenEnhancer extends JwtAccessTokenConverter {
+
+
+        @Override
+        public OAuth2Authentication extractAuthentication(Map<String, ?> claims) {
+            OAuth2Authentication authentication = super.extractAuthentication(claims);
+            authentication.setDetails(claims);
+            return authentication;
+        }
+
+
         @Override
         public OAuth2AccessToken enhance(OAuth2AccessToken accessToken, OAuth2Authentication authentication) {
+
             User user = (User) authentication.getPrincipal();
 
             Map<String, Object> info = new LinkedHashMap<String, Object>(accessToken.getAdditionalInformation());
 
             info.put("email", user.getEmail());
+            info.put("userId", user.getId());
+
+            authentication.setDetails(user.getId());
 
             DefaultOAuth2AccessToken customAccessToken = new DefaultOAuth2AccessToken(accessToken);
             customAccessToken.setAdditionalInformation(info);
+
+            Date expDate =  Date.from(Instant.now().plus(100, ChronoUnit.DAYS));
+            customAccessToken.setExpiration(expDate);
 
             return super.enhance(customAccessToken, authentication);
         }

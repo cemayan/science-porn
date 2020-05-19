@@ -14,8 +14,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: auth-service
-  labels:
-    app: auth-service
 spec:
   replicas: 1
   selector:

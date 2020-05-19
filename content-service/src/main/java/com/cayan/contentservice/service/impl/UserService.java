@@ -1,8 +1,8 @@
-package com.cayan.sharingservice.service.impl;
+package com.cayan.contentservice.service.impl;
 
 import com.cayan.common.dto.UserDTO;
-import com.cayan.sharingservice.config.RibbonConfiguration;
-import com.cayan.sharingservice.service.IUserService;
+
+import com.cayan.contentservice.config.RibbonConfiguration;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import org.springframework.cloud.netflix.ribbon.RibbonClient;
@@ -11,7 +11,7 @@ import org.springframework.web.client.RestTemplate;
 
 @Service
 @RibbonClient(name = "user-service", configuration = RibbonConfiguration.class)
-public class UserService  implements IUserService {
+public class UserService {
 
     private final RestTemplate restTemplate;
 

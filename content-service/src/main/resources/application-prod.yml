@@ -6,7 +6,7 @@ spring:
   application:
     name: content-service
   datasource:
-    url: jdbc:mysql://mysql:3306/scienceporn_db?useSSL=false
+    url: jdbc:mysql://localhost:3306/scienceporn_db?useSSL=false
     username: root
     password: password
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -27,13 +27,13 @@ spring:
 
 kafka:
   topic: contents
-  bootstrapAddress: kafka:9094
+  bootstrapAddress: my-cluster-kafka-bootstrap.kafka.svc.cluster.local:9092
 
 logging:
   level:
     ROOT: ERROR
     org.springframework.web: ERROR
-    com.cayan.sharingservice: DEBUG
+    com.cayan.contentservice: DEBUG
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
     file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
@@ -46,7 +46,7 @@ user-service:
     eureka:
       enabled: false
     ServerListRefreshInterval: 5000
-    listOfServers: localhost:8084
+    listOfServers: user-service:8084
 
 auth-server:
   url: http://auth-service:8081

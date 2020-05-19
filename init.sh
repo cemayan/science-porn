@@ -5,7 +5,7 @@ function log_blue() { printf "\x1B[94m>> $1\x1B[39m\n"; }
 
 function start-kafka() {
   log_blue "Starting kafka..."
-  LOCAL_IP=$(ifconfig en0 | grep "inet " | cut -d\  -f2) docker-compose -f "$SCRIPT_DIR/docker/kafka/docker-compose.yml" up -d --remove-orphans --build --force-recreate
+  LOCAL_IP=$(ifconfig en0 | grep "inet " | cut -d\  -f2) docker-compose -f "$SCRIPT_DIR/docker/kafka/docker-compose.yml" up -d  --remove-orphans --build
 }
 
 function start-mysql() {
@@ -23,9 +23,10 @@ function start-all() {
 
 function stop-all() {
   log_blue "Stopping kafka..."
-  docker-compose -f "$SCRIPT_DIR/docker/kafka/docker-compose.yml" stop
-  docker-compose -f "$SCRIPT_DIR/docker/mysql/docker-compose.yml" stop
-  docker-compose -f "$SCRIPT_DIR/docker/services/docker-compose.yml"  down
+  docker-compose -f "$SCRIPT_DIR/docker/kafka/docker-compose.yml" down
+  #docker-compose -f "$SCRIPT_DIR/docker/mysql/docker-compose.yml" stop
+  #docker-compose -f "$SCRIPT_DIR/docker/services/docker-compose.yml"  down
+
 }
 
 function kafka-topic-consume() {
