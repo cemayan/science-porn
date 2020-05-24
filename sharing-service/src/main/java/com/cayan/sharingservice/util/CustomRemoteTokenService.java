@@ -61,6 +61,8 @@ public class CustomRemoteTokenService extends RemoteTokenServices {
 
     public OAuth2Authentication loadAuthentication(String accessToken) throws AuthenticationException, InvalidTokenException {
 
+        //TODO: Keylere TTL eklenecek token süresi dolunca silinmesi lazım
+
         DecodedJWT jwt = null;
         String userId = "";
 
