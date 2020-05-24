@@ -1,5 +1,6 @@
 package com.cayan.contentservice.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
@@ -7,6 +8,9 @@ import org.neo4j.ogm.annotation.Relationship;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.neo4j.ogm.annotation.Relationship.INCOMING;
+import static org.neo4j.ogm.annotation.Relationship.OUTGOING;
 
 @NodeEntity
 public class Person {
@@ -17,10 +21,12 @@ public class Person {
 
     private Long userId;
 
-    @Relationship(type = "SHARED_BY")
-    private ScienceContent  sharedBy;
+    @Relationship(type = "AUTHOR_BY")
+    @JsonIgnoreProperties("person")
+    private List<AuthorBy>  authorByList =  new ArrayList<>();
 
     @Relationship(type = "LIKED_BY")
+    @JsonIgnoreProperties({"authorBy", "likedByList"})
     private List<ScienceContent> likedList = new ArrayList<>();
 
     public Person(Long userId) {
@@ -39,12 +45,12 @@ public class Person {
         this.userId = userId;
     }
 
-    public ScienceContent getSharedBy() {
-        return sharedBy;
+    public List<AuthorBy> getAuthorByList() {
+        return authorByList;
     }
 
-    public void setSharedBy(ScienceContent sharedBy) {
-        this.sharedBy = sharedBy;
+    public void setAuthorByList(List<AuthorBy> authorByList) {
+        this.authorByList = authorByList;
     }
 
     public List<ScienceContent> getLikedList() {

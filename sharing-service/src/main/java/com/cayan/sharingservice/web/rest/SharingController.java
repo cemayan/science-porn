@@ -42,7 +42,7 @@ public class SharingController {
 
 
     @ApiOperation(value = "Write contents topic")
-    @PostMapping("/sendTopic")
+    @PostMapping("/science-content")
     @PreAuthorize("hasAuthority('role_user')")
     public void writeContentsTopic(@RequestBody ScienceContentDTO scienceContentDTO) throws JsonProcessingException {
 

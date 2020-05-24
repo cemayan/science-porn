@@ -1,5 +1,5 @@
 package com.cayan.common.enumaration;
 
 public enum ScienceContentRelationship {
-    SHARED_BY, LIKED_BY
+    SHARED_BY, LIKED_BY, AUTHOR_BY
 }

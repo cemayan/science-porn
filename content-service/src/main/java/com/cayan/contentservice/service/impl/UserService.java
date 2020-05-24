@@ -3,6 +3,7 @@ package com.cayan.contentservice.service.impl;
 import com.cayan.common.dto.UserDTO;
 
 import com.cayan.contentservice.config.RibbonConfiguration;
+import com.cayan.contentservice.service.IUserService;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import org.springframework.cloud.netflix.ribbon.RibbonClient;
@@ -11,7 +12,7 @@ import org.springframework.web.client.RestTemplate;
 
 @Service
 @RibbonClient(name = "user-service", configuration = RibbonConfiguration.class)
-public class UserService {
+public class UserService  implements IUserService {
 
     private final RestTemplate restTemplate;
 

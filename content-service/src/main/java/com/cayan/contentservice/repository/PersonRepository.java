@@ -9,4 +9,6 @@ import java.util.Optional;
 public interface PersonRepository extends Neo4jRepository<Person, Long> {
 
     Optional<Person> findByUserId(Long userId);
+
+
 }

@@ -46,10 +46,12 @@ user-service:
     eureka:
       enabled: false
     ServerListRefreshInterval: 5000
-    listOfServers: user-service:8084
+    listOfServers: localhost:8084
+
 
 auth-server:
-  url: http://auth-service:8081
+  url: http://localhost:8081/uaa
+
 
 management:
   security:

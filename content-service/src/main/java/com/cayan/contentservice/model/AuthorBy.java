@@ -1,31 +1,36 @@
 package com.cayan.contentservice.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.neo4j.ogm.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@RelationshipEntity(type = "LIKED_BY")
-public class LikedBy {
+@RelationshipEntity(type = "AUTHOR_BY")
+public class AuthorBy {
     @Id
     @GeneratedValue
+    @JsonIgnore
     private Long id;
 
+    @JsonIgnore
     private List<String> roles = new ArrayList<>();
 
     @StartNode
+    @JsonIgnoreProperties({"authorByList", "likedList"})
     private Person person;
 
     @EndNode
-    private ScienceContent scienceContext;
+    @JsonIgnoreProperties({"authorBy", "likedByList"})
+    private ScienceContent scienceContent;
 
-    public LikedBy() {
+    public AuthorBy() {
     }
 
-    public LikedBy(Person person, ScienceContent scienceContext) {
+    public AuthorBy(Person person, ScienceContent scienceContent) {
         this.person = person;
-        this.scienceContext = scienceContext;
+        this.scienceContent = scienceContent;
     }
 
     public Long getId() {
@@ -38,8 +43,13 @@ public class LikedBy {
         return person;
     }
 
-    public ScienceContent getMovie() {
-        return scienceContext;
+
+    public ScienceContent getScienceContent() {
+        return scienceContent;
+    }
+
+    public void setScienceContent(ScienceContent scienceContent) {
+        this.scienceContent = scienceContent;
     }
 
     public void setRoles(List<String> roles) {

@@ -9,6 +9,11 @@ public class CustomPrincipal {
     public CustomPrincipal() {
     }
 
+    public CustomPrincipal(Long userId) {
+        this.userId = userId;
+    }
+
+
     public CustomPrincipal(Long userId, String username, String email) {
         this.userId = userId;
         this.username = username;

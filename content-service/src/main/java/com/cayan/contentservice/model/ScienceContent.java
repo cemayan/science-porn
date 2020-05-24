@@ -1,10 +1,12 @@
 package com.cayan.contentservice.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,13 +19,19 @@ public class ScienceContent {
     @GeneratedValue
     private Long id;
 
-    private String content;
     private String title;
+    private String content;
 
-    @Relationship(type = "SHARED_BY", direction = INCOMING)
-    private SharedBy sharedBy;
+    private LocalDateTime createdAt;
+
+    private String image;
+
+    @Relationship(type = "AUTHOR_BY", direction = INCOMING)
+    @JsonIgnoreProperties("scienceContent")
+    private AuthorBy authorBy;
 
     @Relationship(type = "LIKED_BY", direction = INCOMING)
+    @JsonIgnoreProperties({"authorByList", "likedList"})
     private List<LikedBy> likedByList = new ArrayList<>();
 
     public ScienceContent(String content, String title) {
@@ -34,7 +42,6 @@ public class ScienceContent {
     public Long getId() {
         return id;
     }
-
 
     public String getContent() {
         return content;
@@ -52,13 +59,12 @@ public class ScienceContent {
         this.title = title;
     }
 
-
-    public SharedBy getSharedBy() {
-        return sharedBy;
+    public String getImage() {
+        return image;
     }
 
-    public void setSharedBy(SharedBy sharedBy) {
-        this.sharedBy = sharedBy;
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public List<LikedBy> getLikedByList() {
@@ -67,5 +73,21 @@ public class ScienceContent {
 
     public void setLikedByList(List<LikedBy> likedByList) {
         this.likedByList = likedByList;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public AuthorBy getAuthorBy() {
+        return authorBy;
+    }
+
+    public void setAuthorBy(AuthorBy authorBy) {
+        this.authorBy = authorBy;
     }
 }

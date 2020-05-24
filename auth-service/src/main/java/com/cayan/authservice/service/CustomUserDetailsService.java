@@ -32,6 +32,11 @@ public class CustomUserDetailsService implements UserDetailsService {
 
         new AccountStatusUserDetailsChecker().check(user.get());
 
+        user.map(x-> {
+            x.setUsername(String.valueOf(x.getId()));
+            return x;
+        });
+
         return user.get();
     }
 

@@ -2,10 +2,9 @@ package com.cayan.contentservice.service.impl;
 
 
 import com.cayan.common.dto.ScienceContentDTO;
-import com.cayan.common.dto.UserDTO;
 import com.cayan.contentservice.model.LikedBy;
 import com.cayan.contentservice.model.Person;
-import com.cayan.contentservice.model.SharedBy;
+import com.cayan.contentservice.model.AuthorBy;
 import com.cayan.contentservice.model.ScienceContent;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -14,6 +13,7 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -50,7 +50,7 @@ public class KafkaConsumerService {
 
                 switch (scienceContentDTO.getRelationship()) {
 
-                    case SHARED_BY:
+                    case AUTHOR_BY:
 
                         currentContext  = new ScienceContent(scienceContentDTO.getContent(), scienceContentDTO.getTitle());
 
@@ -59,9 +59,10 @@ public class KafkaConsumerService {
                             currentContext =  contentService.getContent(scienceContentDTO.getId()).get();
                         }
 
-                        SharedBy sharedBy = new SharedBy(currentUser, currentContext);
-                        currentContext.setSharedBy(sharedBy);
+                        AuthorBy sharedBy = new AuthorBy(currentUser, currentContext);
+                        currentContext.setAuthorBy(sharedBy);
 
+                        currentContext.setCreatedAt(LocalDateTime.now());
                         contentService.save(currentContext);
 
                         break;
@@ -80,6 +81,8 @@ public class KafkaConsumerService {
 
                             contentService.save(scienceContent);
                         }
+                        break;
+                    case SHARED_BY:
                         break;
                     default:
                         break;

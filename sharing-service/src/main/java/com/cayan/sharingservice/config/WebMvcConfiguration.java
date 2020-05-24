@@ -5,6 +5,7 @@ import com.cayan.common.model.CustomPrincipal;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.MethodParameter;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.support.WebDataBinderFactory;
@@ -44,6 +45,8 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
             }
         };
     }
+
+
 
     @Bean
     public WebMvcConfigurer corsConfigurer() {
