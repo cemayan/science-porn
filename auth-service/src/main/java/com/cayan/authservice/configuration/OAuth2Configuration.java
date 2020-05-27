@@ -129,7 +129,7 @@ public class OAuth2Configuration extends AuthorizationServerConfigurerAdapter {
             DefaultOAuth2AccessToken customAccessToken = new DefaultOAuth2AccessToken(accessToken);
             customAccessToken.setAdditionalInformation(info);
 
-            Date expDate =  Date.from(Instant.now().plus(100, ChronoUnit.DAYS));
+            Date expDate =  Date.from(Instant.now().plus(365, ChronoUnit.DAYS));
             customAccessToken.setExpiration(expDate);
 
             return super.enhance(customAccessToken, authentication);

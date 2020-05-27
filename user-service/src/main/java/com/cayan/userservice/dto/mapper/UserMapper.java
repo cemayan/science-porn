@@ -1,6 +1,6 @@
 package com.cayan.userservice.dto.mapper;
 
-import com.cayan.userservice.dto.UserDTO;
+import com.cayan.common.dto.UserDTO;
 import com.cayan.userservice.entity.User;
 import com.cayan.userservice.service.UserService;
 import org.modelmapper.ModelMapper;

@@ -1,5 +1,6 @@
 package com.cayan.contentservice.config;
 
+import com.cayan.contentservice.service.CustomRemoteTokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -54,7 +55,7 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
         tokenServices.setClientId("adminapp");
         tokenServices.setClientSecret("password");
         tokenServices.setCheckTokenEndpointUrl(authEndpoint + "/oauth/check_token");
-        return tokenServices;
+        return new CustomRemoteTokenService(tokenServices);
     }
 
 

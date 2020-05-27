@@ -1,17 +1,20 @@
 import React from "react";
-import { View, StatusBar, SafeAreaView } from "react-native";
-import HomeScreen from "./src/screens/HomeScreen";
 import { Provider } from "mobx-react";
 import scienceContentStore from "./src/store/ScienceContentStore";
+import tokenStore from "./src/store/TokenStore";
+
+import Navigator from "./Navigator";
+
+const stores = {
+  scienceContentStore,
+  tokenStore,
+};
 
 export default class App extends React.Component {
   render() {
     return (
-      <Provider scienceContentStore={scienceContentStore}>
-        <SafeAreaView style={{ flex: 1 }}>
-          <StatusBar hidden={false} />
-          <HomeScreen />
-        </SafeAreaView>
+      <Provider {...stores}>
+        <Navigator />
       </Provider>
     );
   }

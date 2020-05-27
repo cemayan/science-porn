@@ -51,11 +51,15 @@ public class ContentService implements IContentService {
     }
 
 
-    public Optional<ScienceContent> getContent(Long id) {
-        return scienceContextRepository.findById(id);
+    public Optional<ScienceContent> getContent(Long id, Long userId) {
+        return scienceContextRepository.findByIdAndUserId(id, userId);
     }
 
     public Optional<Person> getPersonByUserId(Long userId) {
         return personRepository.findByUserId(userId);
+    }
+
+    public Person addNewUser(Person person) {
+      return personRepository.save(person);
     }
 }

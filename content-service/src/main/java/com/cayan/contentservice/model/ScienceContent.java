@@ -21,6 +21,7 @@ public class ScienceContent {
 
     private String title;
     private String content;
+    private Long userId;
 
     private LocalDateTime createdAt;
 
@@ -34,9 +35,11 @@ public class ScienceContent {
     @JsonIgnoreProperties({"authorByList", "likedList"})
     private List<LikedBy> likedByList = new ArrayList<>();
 
-    public ScienceContent(String content, String title) {
-        this.content = content;
+    public ScienceContent( String title,String content, String image, Long userId) {
         this.title = title;
+        this.content = content;
+        this.image = image;
+        this.userId = userId;
     }
 
     public Long getId() {
@@ -85,6 +88,14 @@ public class ScienceContent {
 
     public AuthorBy getAuthorBy() {
         return authorBy;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public void setAuthorBy(AuthorBy authorBy) {

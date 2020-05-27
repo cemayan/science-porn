@@ -28,15 +28,15 @@ spring:
         physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
       ddl-auto: update
 
-
-logging:
-  level:
-    ROOT: ERROR
-    org.springframework.web: ERROR
-    com.cayan.authservice: DEBUG
-  pattern:
-    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
-    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
-  file:
-    name: /tmp/science-porn/log/application-auth-debug.log
+#
+#logging:
+#  level:
+#    ROOT: ERROR
+#    org.springframework.web: ERROR
+#    com.cayan.authservice: DEBUG
+#  pattern:
+#    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+#    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+#  file:
+#    name: /tmp/science-porn/log/application-auth-debug.log
 

@@ -21,6 +21,9 @@ public class Person {
 
     private Long userId;
 
+    private String userName;
+    private String profilePicture;
+
     @Relationship(type = "AUTHOR_BY")
     @JsonIgnoreProperties("person")
     private List<AuthorBy>  authorByList =  new ArrayList<>();
@@ -29,8 +32,10 @@ public class Person {
     @JsonIgnoreProperties({"authorBy", "likedByList"})
     private List<ScienceContent> likedList = new ArrayList<>();
 
-    public Person(Long userId) {
+    public Person(Long userId, String userName, String profilePicture) {
         this.userId = userId;
+        this.userName = userName;
+        this.profilePicture = profilePicture;
     }
 
     public Long getId() {
@@ -59,5 +64,21 @@ public class Person {
 
     public void setLikedList(List<ScienceContent> likedList) {
         this.likedList = likedList;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getProfilePicture() {
+        return profilePicture;
+    }
+
+    public void setProfilePicture(String profilePicture) {
+        this.profilePicture = profilePicture;
     }
 }

@@ -10,21 +10,35 @@ function start-kafka() {
 
 function start-mysql() {
   log_blue "Starting mysql..."
-  docker-compose -f "$SCRIPT_DIR/docker/mysql/docker-compose.yml" up -d --build
+  docker-compose -f "$SCRIPT_DIR/docker/mysql/docker-compose.yml" up -d
+}
+
+function start-redis() {
+  log_blue "Starting redis..."
+  docker-compose -f "$SCRIPT_DIR/docker/redis/docker-compose.yml" up -d
+}
+
+function start-neo4j() {
+  log_blue "Starting neo4j..."
+  docker-compose -f "$SCRIPT_DIR/docker/neo4j/docker-compose.yml" up -d
 }
 
 function start-all() {
   log_blue "Starting services..."
   start-kafka
+  start-redis
+  start-neo4j
   start-mysql
-  start-all-services
+  #start-all-services
 }
 
 
 function stop-all() {
   log_blue "Stopping kafka..."
   docker-compose -f "$SCRIPT_DIR/docker/kafka/docker-compose.yml" down
-  #docker-compose -f "$SCRIPT_DIR/docker/mysql/docker-compose.yml" stop
+  docker-compose -f "$SCRIPT_DIR/docker/redis/docker-compose.yml" down
+  docker-compose -f "$SCRIPT_DIR/docker/neo4j/docker-compose.yml" stop
+  docker-compose -f "$SCRIPT_DIR/docker/mysql/docker-compose.yml" stop
   #docker-compose -f "$SCRIPT_DIR/docker/services/docker-compose.yml"  down
 
 }

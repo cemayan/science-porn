@@ -47,7 +47,6 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
     }
 
 
-
     @Bean
     public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurer() {

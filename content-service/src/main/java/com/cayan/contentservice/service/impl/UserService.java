@@ -22,11 +22,12 @@ public class UserService  implements IUserService {
 
     @HystrixCommand(fallbackMethod = "userfallbackMethod", commandProperties = {
             @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "1000") })
-    public UserDTO getUser(Long userId) {
+    public UserDTO getUserFromAuthDb(Long userId) {
         return this.restTemplate.getForObject("http://user-service/user/"+ userId, UserDTO.class);
     }
 
     private UserDTO userfallbackMethod(Long userId) {
         return  new UserDTO();
     }
+
 }

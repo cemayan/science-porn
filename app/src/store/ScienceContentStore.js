@@ -1,16 +1,16 @@
 import { action, observable, computed } from "mobx";
 
 class ScienceContentStore {
-  @observable userId = "cem";
+  @observable contents = [];
 
-
-  @computed get getUserId() {
-    return this.userId;
+  @computed get getContents() {
+    return this.contents;
   }
 
-  @action setUserId(userId) {
-    this.userId = userId;
+  @action setContents(contents) {
+    this.contents = [...contents];
   }
+
 }
 
 const scienceContentStore = new ScienceContentStore();

@@ -22,6 +22,8 @@ public class User extends BaseEntity implements UserDetails {
     private String password;
     private boolean enabled;
 
+    private String profilePicture;
+
     @Column(name = "account_locked")
     private boolean accountNonLocked;
 
@@ -126,5 +128,13 @@ public class User extends BaseEntity implements UserDetails {
 
     public void setRoles(List<Role> roles) {
         this.roles = roles;
+    }
+
+    public String getProfilePicture() {
+        return profilePicture;
+    }
+
+    public void setProfilePicture(String profilePicture) {
+        this.profilePicture = profilePicture;
     }
 }

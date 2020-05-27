@@ -1,0 +1,19 @@
+version: '2'
+services:
+  redis:
+    hostname: redis:alpine
+    container_name: redis
+    image: redis
+    ports:
+      - "6379:6379"
+    networks:
+     - scienceporn_network
+    volumes:
+      - redis-data:/data
+networks:
+  scienceporn_network:
+    external: true
+
+
+volumes:
+  redis-data:

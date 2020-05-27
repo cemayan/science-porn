@@ -2,6 +2,7 @@ package com.cayan.contentservice.service.impl;
 
 
 import com.cayan.common.dto.ScienceContentDTO;
+import com.cayan.common.dto.UserDTO;
 import com.cayan.contentservice.model.LikedBy;
 import com.cayan.contentservice.model.Person;
 import com.cayan.contentservice.model.AuthorBy;
@@ -38,25 +39,27 @@ public class KafkaConsumerService {
             ScienceContentDTO scienceContentDTO = objectMapper.readValue(content, ScienceContentDTO.class);
             Optional<Person>  foundedPerson = contentService.getPersonByUserId(scienceContentDTO.getUserId());
 
-            Person currentUser = null;
             ScienceContent currentContext = null;
+            Person currentUser = null;
 
             if(foundedPerson.isPresent()) {
                 currentUser = foundedPerson.get();
             }
             else {
-                currentUser  = new Person(scienceContentDTO.getUserId());
+                //TODO: kullanıcı bulunmazsa yeni oluştur.
+                UserDTO user = userService.getUserFromAuthDb(scienceContentDTO.getUserId());
+                Person p1 = new Person(user.getId(), user.getUsername(), user.getProfilePicture());
+                currentUser = contentService.addNewUser(p1);
             }
 
                 switch (scienceContentDTO.getRelationship()) {
 
                     case AUTHOR_BY:
 
-                        currentContext  = new ScienceContent(scienceContentDTO.getContent(), scienceContentDTO.getTitle());
+                        currentContext  = new ScienceContent(scienceContentDTO.getTitle(),scienceContentDTO.getContent(), scienceContentDTO.getImage(), currentUser.getUserId());
 
-                        //TODO: Id ve userId check yapılacak.
                         if(scienceContentDTO.getId() != null) {
-                            currentContext =  contentService.getContent(scienceContentDTO.getId()).get();
+                            currentContext =  contentService.getContent(scienceContentDTO.getId(), currentUser.getUserId()).get();
                         }
 
                         AuthorBy sharedBy = new AuthorBy(currentUser, currentContext);
@@ -68,7 +71,7 @@ public class KafkaConsumerService {
                         break;
                     case LIKED_BY:
 
-                        Optional<ScienceContent>  foundedContent =  contentService.getContent(scienceContentDTO.getId());
+                        Optional<ScienceContent>  foundedContent =  contentService.getContent(scienceContentDTO.getId(), currentUser.getUserId());
 
                         if(foundedContent.isPresent()) {
 

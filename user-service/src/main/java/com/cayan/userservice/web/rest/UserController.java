@@ -1,9 +1,10 @@
 package com.cayan.userservice.web.rest;
 
 
+import com.cayan.common.dto.UserDTO;
 import com.cayan.userservice.aop.LogExecutionTime;
 import com.cayan.userservice.aop.LogRequest;
-import com.cayan.userservice.dto.UserDTO;
+import com.cayan.userservice.dto.LoginDTO;
 import com.cayan.userservice.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -29,4 +30,5 @@ public class UserController {
                 .map(resp -> ResponseEntity.ok().body(resp))
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User does not exist"));
     }
+
 }
