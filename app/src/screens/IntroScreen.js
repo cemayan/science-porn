@@ -11,6 +11,7 @@ import {
 import HomeScreen from "./HomeScreen";
 import LoginScreen from "./LoginScreen";
 import AsyncStorage from "@react-native-community/async-storage";
+import { inject, observer } from "mobx-react";
 
 const dimensions = Dimensions.get("window");
 const c = Math.round((dimensions.width * 9) / 16);
@@ -57,6 +58,8 @@ const styles = StyleSheet.create({
   },
 });
 
+@inject("generalStore")
+@observer
 export default class IntroScreen extends React.Component {
   constructor() {
     super();
@@ -73,11 +76,12 @@ export default class IntroScreen extends React.Component {
     );
   };
   _onDone = () => {
+    this.props.generalStore.setInitialState(false);
+    AsyncStorage.setItem("initialState", "false");
     this.setState({ showRealApp: true });
   };
   render() {
     if (this.state.showRealApp) {
-      AsyncStorage.setItem("initialState", "false");
       return <LoginScreen />;
     } else {
       return (

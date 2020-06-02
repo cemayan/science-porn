@@ -1,16 +1,24 @@
 import { action, observable, computed } from "mobx";
 
 class ScienceContentStore {
-  @observable contents = [];
+  @observable myContents = [];
+  @observable top5 = [];
 
-  @computed get getContents() {
-    return this.contents;
+  @computed get getMyContents() {
+    return this.myContents;
   }
 
-  @action setContents(contents) {
-    this.contents = [...contents];
+  @action setMyContents(myContents) {
+    this.myContents = [...myContents];
   }
 
+  @computed get getTop5() {
+    return this.top5;
+  }
+
+  @action setTop5(top5) {
+    this.top5 = [...top5];
+  }
 }
 
 const scienceContentStore = new ScienceContentStore();

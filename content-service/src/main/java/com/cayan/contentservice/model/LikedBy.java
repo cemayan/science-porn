@@ -1,5 +1,6 @@
 package com.cayan.contentservice.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.neo4j.ogm.annotation.*;
 
@@ -15,9 +16,11 @@ public class LikedBy {
     private List<String> roles = new ArrayList<>();
 
     @StartNode
+    @JsonIgnoreProperties({"authorByList", "likedList"})
     private Person person;
 
     @EndNode
+    @JsonIgnore
     private ScienceContent scienceContext;
 
     public LikedBy() {
@@ -38,8 +41,12 @@ public class LikedBy {
         return person;
     }
 
-    public ScienceContent getMovie() {
+    public ScienceContent getScienceContext() {
         return scienceContext;
+    }
+
+    public void setScienceContext(ScienceContent scienceContext) {
+        this.scienceContext = scienceContext;
     }
 
     public void setRoles(List<String> roles) {

@@ -59,19 +59,19 @@ public class KafkaConsumerService {
                         currentContext  = new ScienceContent(scienceContentDTO.getTitle(),scienceContentDTO.getContent(), scienceContentDTO.getImage(), currentUser.getUserId());
 
                         if(scienceContentDTO.getId() != null) {
-                            currentContext =  contentService.getContent(scienceContentDTO.getId(), currentUser.getUserId()).get();
+                            currentContext =  contentService.getContent(scienceContentDTO.getId()).get();
                         }
 
                         AuthorBy sharedBy = new AuthorBy(currentUser, currentContext);
                         currentContext.setAuthorBy(sharedBy);
-
+                        currentContext.setLikeCount(Long.valueOf(0));
                         currentContext.setCreatedAt(LocalDateTime.now());
                         contentService.save(currentContext);
 
                         break;
                     case LIKED_BY:
 
-                        Optional<ScienceContent>  foundedContent =  contentService.getContent(scienceContentDTO.getId(), currentUser.getUserId());
+                        Optional<ScienceContent>  foundedContent =  contentService.getContent(scienceContentDTO.getId());
 
                         if(foundedContent.isPresent()) {
 
@@ -80,6 +80,8 @@ public class KafkaConsumerService {
                             LikedBy likedBy = new LikedBy(currentUser, scienceContent);
                             List<LikedBy> likedByList = new ArrayList<>();
                             likedByList.add(likedBy);
+                            Long beforeCount = scienceContent.getLikeCount();
+                            scienceContent.setLikeCount(beforeCount == null ? 0 : beforeCount + 1);
                             scienceContent.setLikedByList(likedByList);
 
                             contentService.save(scienceContent);

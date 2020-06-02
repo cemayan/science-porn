@@ -1,6 +1,7 @@
 package com.cayan.contentservice.service.impl;
 
 import com.cayan.contentservice.model.AuthorBy;
+import com.cayan.contentservice.model.LikedBy;
 import com.cayan.contentservice.model.Person;
 import com.cayan.contentservice.model.ScienceContent;
 import com.cayan.contentservice.repository.PersonRepository;
@@ -22,6 +23,8 @@ import java.util.Optional;
 @Service
 public class ContentService implements IContentService {
 
+    private static Logger LOGGER = LoggerFactory.getLogger(ContentService.class);
+
     @Autowired
     ScienceContextRepository scienceContextRepository;
 
@@ -31,7 +34,6 @@ public class ContentService implements IContentService {
     @Autowired
     SecurityDetails securityDetails;
 
-    private static Logger LOGGER = LoggerFactory.getLogger(ContentService.class);
 
     @Override
     public void save(ScienceContent scienceContext) {
@@ -39,7 +41,7 @@ public class ContentService implements IContentService {
     }
 
     @Override
-    public List<AuthorBy> getAll() {
+    public List<AuthorBy> getAllMyContents() {
 
         try {
            Optional<Person> person =   personRepository.findByUserId(securityDetails.getAuthenticatedUser().getUserId());
@@ -50,15 +52,23 @@ public class ContentService implements IContentService {
         }
     }
 
-
-    public Optional<ScienceContent> getContent(Long id, Long userId) {
-        return scienceContextRepository.findByIdAndUserId(id, userId);
+    @Override
+    public List<ScienceContent> getTop5() {
+        return scienceContextRepository.findTop5ByOrderByLikeCount();
     }
 
+    @Override
+    public Optional<ScienceContent> getContent(Long id) {
+        return scienceContextRepository.findById(id);
+    }
+
+
+    @Override
     public Optional<Person> getPersonByUserId(Long userId) {
         return personRepository.findByUserId(userId);
     }
 
+    @Override
     public Person addNewUser(Person person) {
       return personRepository.save(person);
     }

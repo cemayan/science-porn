@@ -1,6 +1,7 @@
 package com.cayan.contentservice.web.rest;
 
 import com.cayan.contentservice.model.AuthorBy;
+import com.cayan.contentservice.model.LikedBy;
 import com.cayan.contentservice.model.ScienceContent;
 import com.cayan.contentservice.service.IContentService;
 import com.cayan.contentservice.service.impl.KafkaConsumerService;
@@ -24,11 +25,17 @@ public class ContentController {
     KafkaConsumerService kafkaConsumerService;
 
 
-    @PostMapping("/getContent")
+    @PostMapping("/getMyContent")
     @PreAuthorize("hasAuthority('role_user')")
-    public List<AuthorBy> getContents(){
-        return  contentService.getAll();
+    public List<AuthorBy> getMyContents(){
+        return  contentService.getAllMyContents();
     }
 
+
+    @PostMapping("/getTop5")
+    @PreAuthorize("hasAuthority('role_user')")
+    public List<ScienceContent> getTop5(){
+        return  contentService.getTop5();
+    }
 
 }

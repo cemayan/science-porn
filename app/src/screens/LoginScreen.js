@@ -12,7 +12,6 @@ import {
 // galio component
 import { Block, Button, Input, NavBar, Text } from "galio-framework";
 import theme from "../theme";
-import AsyncStorage from "@react-native-community/async-storage";
 import tokenStore from "../store/TokenStore";
 import { inject, observer } from "mobx-react";
 import tokenService from "../services/TokenService";

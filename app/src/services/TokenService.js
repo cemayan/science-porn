@@ -15,9 +15,9 @@ const tokenService = {
       .then((x) => x.json())
       .then(async (resp) => {
         if (!resp.hasOwnProperty("error")) {
-          await AsyncStorage.setItem("access_token", resp["access_token"]);
+          await AsyncStorage.setItem("accessToken", resp["access_token"]);
           await AsyncStorage.setItem("email", resp["email"]);
-          await AsyncStorage.setItem("refresh_token", resp["refresh_token"]);
+          await AsyncStorage.setItem("refreshToken", resp["refresh_token"]);
           await AsyncStorage.setItem("userId", resp["userId"].toString());
           await AsyncStorage.setItem(
             "expires_in",

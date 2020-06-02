@@ -26,6 +26,7 @@ public class ScienceContent {
     private LocalDateTime createdAt;
 
     private String image;
+    private Long likeCount;
 
     @Relationship(type = "AUTHOR_BY", direction = INCOMING)
     @JsonIgnoreProperties("scienceContent")
@@ -100,5 +101,13 @@ public class ScienceContent {
 
     public void setAuthorBy(AuthorBy authorBy) {
         this.authorBy = authorBy;
+    }
+
+    public Long getLikeCount() {
+        return likeCount;
+    }
+
+    public void setLikeCount(Long likeCount) {
+        this.likeCount = likeCount;
     }
 }
