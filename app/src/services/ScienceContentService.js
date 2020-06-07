@@ -36,7 +36,7 @@ const scienceContentService = {
     return difference;
   },
   getMyContents: async () => {
-    const token = await AsyncStorage.getItem("access_token");
+    const token = await AsyncStorage.getItem("accessToken");
 
     var contentList = await fetch(
       "http://localhost:8082/content/getMyContent",
@@ -77,7 +77,7 @@ const scienceContentService = {
     return contentList;
   },
   getTop5: async () => {
-    const token = await AsyncStorage.getItem("access_token");
+    const token = await AsyncStorage.getItem("accessToken");
 
     var contentList = await fetch("http://localhost:8082/content/getTop5", {
       method: "POST",
@@ -97,6 +97,7 @@ const scienceContentService = {
               title: data.title,
               content: data.content,
               profilePicture: data.authorBy.person.profilePicture,
+              userName: data.authorBy.person.userName,
             });
           });
         }

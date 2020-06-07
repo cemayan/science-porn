@@ -35,6 +35,7 @@ export default class Navigator extends React.Component {
   }
 
   componentDidMount() {
+    //AsyncStorage.removeItem("accessToken");
     AsyncStorage.getItem("accessToken").then((data) => {
       if (data != null || data !== "") {
         this.props.tokenStore.setAccessToken(data);

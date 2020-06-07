@@ -71,10 +71,10 @@ class LoginScreen extends React.Component {
 
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-        <Block safe flex style={{ backgroundColor: theme.COLORS.WHITE }}>
+        <Block flex style={{ backgroundColor: theme.COLORS.WHITE }}>
           <KeyboardAvoidingView
             style={styles.container}
-            behavior={Platform.OS == "ios" ? "padding" : "position"}
+            behavior={Platform.OS == "ios" ? "padding" : null}
             enabled
           >
             <Block
@@ -85,7 +85,7 @@ class LoginScreen extends React.Component {
                 marginBottom: height * 0.1,
               }}
             />
-            <Block flex={1}>
+            <Block flex={1} style={styles.block}>
               <Block flex={1}>
                 <Input
                   placeholder="Username"
@@ -162,6 +162,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: theme.SIZES.BASE,
     backgroundColor: theme.COLORS.WHITE,
   },
+  block: {},
 });
 
 export default LoginScreen;

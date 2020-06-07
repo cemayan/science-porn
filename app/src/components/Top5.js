@@ -21,7 +21,7 @@ const InstallButton = (props) => (
     size="tiny"
     onPress={() => {
       props.navigation.navigate("Content", {
-        title: props.title,
+        content: props.content,
       });
     }}
   >
@@ -51,8 +51,6 @@ export default class Top5 extends React.Component {
   async componentDidMount() {
     var content = await scienceContentService.getTop5();
 
-    console.log(toJS(this.props.scienceContentStore.top5));
-
     this.setState({
       scienceContentList: toJS(this.props.scienceContentStore.getTop5),
     });
@@ -77,13 +75,13 @@ export default class Top5 extends React.Component {
               <Layout>
                 <ListItem
                   key={data.id}
-                  title={data.title}
-                  description={data.content}
+                  title={data.userName}
+                  description={data.title}
                   accessoryLeft={() => (
                     <ItemImage image={data.profilePicture} />
                   )}
                   accessoryRight={() => (
-                    <InstallButton {...this.props} title={data.title} />
+                    <InstallButton {...this.props} content={data} />
                   )}
                 />
                 <Divider />
