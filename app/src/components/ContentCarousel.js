@@ -34,10 +34,8 @@ export default class ContentCarousel extends React.Component {
     const isTinder = false;
     return (
       <Layout style={styles.carousel} level="3">
-        <SafeAreaView
-          style={{ flex: 1, backgroundColor: "rebeccapurple", paddingTop: 50 }}
-        >
-          <View style={[styles.exampleContainer, styles.exampleContainerLight]}>
+        <SafeAreaView style={{ flex: 1, paddingTop: 50 }}>
+          <View>
             <Text style={[styles.title, styles.titleDark]}>
               Scienceporn Useful Contents
             </Text>

@@ -76,10 +76,10 @@ const scienceContentService = {
 
     return contentList;
   },
-  getTop5: async () => {
+  getTop3: async () => {
     const token = await AsyncStorage.getItem("accessToken");
 
-    var contentList = await fetch("http://localhost:8082/content/getTop5", {
+    var contentList = await fetch("http://localhost:8082/content/getTop3", {
       method: "POST",
       headers: {
         Authorization: "Bearer " + token,
@@ -102,8 +102,27 @@ const scienceContentService = {
           });
         }
 
-        await scienceContentStore.setTop5(arr);
+        await scienceContentStore.setTop3(arr);
       });
+  },
+  shareContent: async (content) => {
+    const token = await AsyncStorage.getItem("accessToken");
+
+    var content = await fetch("http://localhost:8083/share/science-content", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+      body: JSON.stringify(content),
+    })
+      .then((x) => x.json())
+      .then(async (resp) => {
+        console.log(resp);
+      })
+      .catch((err) => {});
+
+    return await content;
   },
 };
 

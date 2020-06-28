@@ -30,9 +30,9 @@ export default class FollowedUsers extends React.Component {
   }
 
   async componentDidMount() {
-    var content = await scienceContentService.getTop5();
+    var content = await scienceContentService.getTop3();
     this.setState({
-      scienceContentList: toJS(this.props.scienceContentStore.getTop5),
+      scienceContentList: toJS(this.props.scienceContentStore.getTop3),
     });
   }
 
@@ -42,7 +42,7 @@ export default class FollowedUsers extends React.Component {
         {this.state.scienceContentList.map((data) => {
           return (
             <>
-              <Card key={data.id}>
+              <Card key={data.id} style={{ backgroundColor: "#F7F9FC" }}>
                 <Card.Title
                   title={data.userName}
                   subtitle={data.title}
@@ -53,7 +53,12 @@ export default class FollowedUsers extends React.Component {
                     />
                   )}
                   right={(props) => (
-                    <Layout style={{ flexDirection: "row" }}>
+                    <Layout
+                      style={{
+                        flexDirection: "row",
+                        backgroundColor: "#F7F9FC",
+                      }}
+                    >
                       <IconButton
                         {...props}
                         icon="heart-outline"

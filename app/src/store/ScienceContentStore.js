@@ -2,7 +2,7 @@ import { action, observable, computed } from "mobx";
 
 class ScienceContentStore {
   @observable myContents = [];
-  @observable top5 = [];
+  @observable top3 = [];
 
   @computed get getMyContents() {
     return this.myContents;
@@ -12,12 +12,12 @@ class ScienceContentStore {
     this.myContents = [...myContents];
   }
 
-  @computed get getTop5() {
-    return this.top5;
+  @computed get getTop3() {
+    return this.top3;
   }
 
-  @action setTop5(top5) {
-    this.top5 = [...top5];
+  @action setTop3(top3) {
+    this.top3 = [...top3];
   }
 }
 

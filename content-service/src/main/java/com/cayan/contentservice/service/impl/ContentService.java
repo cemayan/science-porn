@@ -53,8 +53,8 @@ public class ContentService implements IContentService {
     }
 
     @Override
-    public List<ScienceContent> getTop5() {
-        return scienceContextRepository.findTop5ByOrderByLikeCount();
+    public List<ScienceContent> getTop3() {
+        return scienceContextRepository.findOrderByLikeCount();
     }
 
     @Override

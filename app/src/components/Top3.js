@@ -39,7 +39,7 @@ const ItemImage = (props) => (
 
 @inject("scienceContentStore")
 @observer
-export default class Top5 extends React.Component {
+export default class Top3 extends React.Component {
   constructor(props) {
     super(props);
 
@@ -49,10 +49,10 @@ export default class Top5 extends React.Component {
   }
 
   async componentDidMount() {
-    var content = await scienceContentService.getTop5();
+    var content = await scienceContentService.getTop3();
 
     this.setState({
-      scienceContentList: toJS(this.props.scienceContentStore.getTop5),
+      scienceContentList: toJS(this.props.scienceContentStore.getTop3),
     });
   }
 
@@ -63,10 +63,11 @@ export default class Top5 extends React.Component {
           style={{
             alignItems: "center",
             justifyContent: "center",
+            backgroundColor: "#EDF1F7",
           }}
         >
           <Text category="h5" style={{ marginVertical: 1 }}>
-            <Icon style={styles.icon} fill="#8F9BB3" name="star" /> Top 5
+            <Icon style={styles.icon} fill="#8F9BB3" name="star" /> Top 3
           </Text>
         </Card>
         <Layout style={styles.layout}>
@@ -74,6 +75,7 @@ export default class Top5 extends React.Component {
             return (
               <Layout>
                 <ListItem
+                  style={{ backgroundColor: "#F7F9FC" }}
                   key={data.id}
                   title={data.userName}
                   description={data.title}

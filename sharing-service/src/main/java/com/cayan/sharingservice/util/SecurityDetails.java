@@ -29,6 +29,5 @@ public class SecurityDetails {
         DecodedJWT jwt = JWT.decode(tokenValue);
 
         return new CustomPrincipal(jwt.getClaim("userId").asLong(), jwt.getClaim("user_name").asString(), jwt.getClaim("email").asString());
-        //return new CustomPrincipal(Long.valueOf(authentication.getPrincipal().toString()));
     }
 }

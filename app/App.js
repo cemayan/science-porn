@@ -3,6 +3,7 @@ import { Provider } from "mobx-react";
 import scienceContentStore from "./src/store/ScienceContentStore";
 import tokenStore from "./src/store/TokenStore";
 import generalStore from "./src/store/GeneralStore";
+import userStore from "./src/store/UserStore";
 import * as eva from "@eva-design/eva";
 import { EvaIconsPack } from "@ui-kitten/eva-icons";
 import { SafeAreaView } from "react-native";
@@ -20,6 +21,7 @@ const stores = {
   scienceContentStore,
   tokenStore,
   generalStore,
+  userStore,
 };
 
 export default class App extends React.Component {

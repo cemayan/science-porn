@@ -1,0 +1,53 @@
+server:
+  port: 8085
+  error:
+    include-stacktrace: on_trace_param
+  servlet:
+    context-path: /user
+
+spring:
+  profiles: prod
+  application:
+    name: relation-service
+  datasource:
+    url: jdbc:mysql://mysql:3306/scienceporn_db?useSSL=false
+    username: root
+    password: password
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    tomcat:
+      test-while-idle: true
+      validation-query: SELECT 1
+    initialization-mode: never
+    platform: mysql
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+    hibernate:
+      naming:
+        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+      ddl-auto: update
+
+
+
+
+auth-server:
+  url: http://auth-service:8081/uaa
+
+
+logging:
+  level:
+    ROOT: ERROR
+    org.springframework.web: ERROR
+    com.cayan.relationservice: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+  file:
+    name: /tmp/science-porn/log/application-relation.log
+
+
+
+management:
+  security:
+    enabled: false

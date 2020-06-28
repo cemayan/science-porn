@@ -24,6 +24,7 @@
         <module>auth-service</module>
         <module>sharing-service</module>
         <module>user-service</module>
+        <module>relation-service</module>
         <module>common</module>
     </modules>
 

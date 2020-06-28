@@ -10,8 +10,11 @@ import tokenStore from "./src/store/TokenStore";
 import generalStore from "./src/store/GeneralStore";
 import MeScreen from "./src/screens/MeScreen";
 import { SafeAreaView } from "react-native";
-import { Icon, Button } from "@ui-kitten/components";
+import { Icon, Button, Input } from "@ui-kitten/components";
 import ContentScreen from "./src/screens/ContentScreen";
+import { View } from "react-native";
+import NewContent from "./src/screens/NewContent";
+import userService from "./src/services/UserService";
 
 const Stack = createStackNavigator();
 
@@ -26,8 +29,11 @@ const getToken = async () => {
 const PersonIcon = (props) => (
   <Icon {...props} name="person-outline" fill="#FFF" />
 );
+const SettingsIcon = (props) => (
+  <Icon {...props} name="settings-outline" fill="#FFF" />
+);
 
-@inject("tokenStore", "generalStore")
+@inject("tokenStore", "generalStore", "userStore")
 @observer
 export default class Navigator extends React.Component {
   constructor(props) {
@@ -46,13 +52,29 @@ export default class Navigator extends React.Component {
         this.props.generalStore.setInitialState(false);
       }
     });
+
+    if (this.props.userStore.getUsername === "") {
+      const user = userService.getCurrentUser();
+    }
   }
 
   render() {
     if (!this.props.generalStore.getInitialState) {
       return (
         <NavigationContainer>
-          <Stack.Navigator initialRouteName="Home">
+          <Stack.Navigator
+            initialRouteName="Home"
+            screenOptions={{
+              headerStyle: {
+                backgroundColor: "#2c4770",
+              },
+              headerTintColor: "#fff",
+              headerTitleStyle: {
+                fontWeight: "bold",
+              },
+              headerTitle: null,
+            }}
+          >
             {this.props.tokenStore.getAccessToken == null ||
             this.props.tokenStore.getAccessToken === "" ? (
               <Stack.Screen name="Login" component={LoginScreen} />
@@ -61,26 +83,34 @@ export default class Navigator extends React.Component {
                 name="Home"
                 component={HomeScreen}
                 options={({ navigation, route }) => ({
-                  headerStyle: {
-                    backgroundColor: "#2c4770",
-                  },
-                  headerTintColor: "#fff",
-                  headerTitleStyle: {
-                    fontWeight: "bold",
-                  },
                   headerRight: () => (
-                    <Button
-                      onPress={() => navigation.navigate("Me")}
-                      title="Info"
-                      appearance="ghost"
-                      accessoryLeft={PersonIcon}
-                    ></Button>
+                    <View style={{ flexDirection: "row" }}>
+                      <Button
+                        onPress={() => navigation.navigate("Me")}
+                        title="Info"
+                        appearance="ghost"
+                        accessoryLeft={PersonIcon}
+                      ></Button>
+                      <Button
+                        onPress={() => navigation.navigate("Me")}
+                        title="Info"
+                        appearance="ghost"
+                        accessoryLeft={SettingsIcon}
+                      ></Button>
+                    </View>
                   ),
                 })}
               />
             )}
             <Stack.Screen name="Me" component={MeScreen} />
             <Stack.Screen name="Content" component={ContentScreen} />
+            <Stack.Screen
+              name="NewContent"
+              component={NewContent}
+              options={({ navigation, route }) => ({
+                headerTitle: "New Content",
+              })}
+            />
           </Stack.Navigator>
         </NavigationContainer>
       );

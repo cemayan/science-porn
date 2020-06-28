@@ -17,13 +17,14 @@ const InstallButton = (props) => (
   </Button>
 );
 
-const Funny5 = () => {
+const Funny3 = () => {
   return (
     <>
       <Card
         style={{
           alignItems: "center",
           justifyContent: "center",
+          backgroundColor: "#EDF1F7",
         }}
       >
         <Text category="h5" style={{ marginVertical: 4 }}>
@@ -49,4 +50,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Funny5;
+export default Funny3;

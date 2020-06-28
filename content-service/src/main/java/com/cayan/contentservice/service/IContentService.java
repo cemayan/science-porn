@@ -13,7 +13,7 @@ public interface IContentService {
 
     void save(ScienceContent scienceContent);
     List<AuthorBy> getAllMyContents();
-    List<ScienceContent> getTop5();
+    List<ScienceContent> getTop3();
     Optional<ScienceContent> getContent(Long id);
     Optional<Person> getPersonByUserId(Long userId);
     Person addNewUser(Person person);

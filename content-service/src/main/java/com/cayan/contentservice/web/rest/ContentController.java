@@ -32,10 +32,10 @@ public class ContentController {
     }
 
 
-    @PostMapping("/getTop5")
+    @PostMapping("/getTop3")
     @PreAuthorize("hasAuthority('role_user')")
-    public List<ScienceContent> getTop5(){
-        return  contentService.getTop5();
+    public List<ScienceContent> getTop3(){
+        return  contentService.getTop3();
     }
 
 }

@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { ListItem } from "@ui-kitten/components";
 
 export const colors = {
   black: "#1a1917",
